@@ -6,18 +6,13 @@ if (!process.env.SLACK_SIGNING_SECRET) {
   process.emit('SIGINT')
 }
 
+createEventAdapter('', {})
+
 const createMiddleware = (adapterFactory) => {
   const adapter = adapterFactory(process.env.SLACK_SIGNING_SECRET)
   const requestListener = adapter.requestListener()
-
-  const middleware = ctx => {
-    console.log('slack request')
-    console.log(ctx.req.body)
-    requestListener(ctx.req, ctx.res)
-  }
-
-  middleware.adapter = adapter
-  return middleware
+  requestListener.adapter = adapter
+  return requestListener
 }
 
 const interactionsMiddleware = createMiddleware(createMessageAdapter)

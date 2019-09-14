@@ -1,23 +1,21 @@
-const Koa = require('koa')
-const logger = require('koa-logger')
-const route = require('koa-route')
+const express = require('express')
+const bodyParser = require('body-parser')
 const slack = require('./slack')
 
-const app = new Koa()
-app.use(logger())
-app.use(route.all('/slack/interactions', slack.interactionsMiddleware))
-app.use(route.all('/slack/events', slack.eventsMiddleware))
+const app = express()
+
+app.use('/slack/events', slack.eventsMiddleware)
+app.use('/slack/interactions', slack.interactionsMiddleware)
+
+app.use(bodyParser.json())
 
 const listen = () => {
   const port = process.env.PORT || 4000
   app.listen(port, () => {
-    console.info(`http server listening on port ${port}`)
-  })
-
-  app.on('error', (err, ctx) => {
-    if (ctx) console.error('internal server error during request: ', err, ctx)
-    else console.error('internal server error:', err)
+    console.info(`listening for slack events on ${port}`)
   })
 }
 
-module.exports = { app, listen }
+module.exports = {
+  app, listen,
+}
