@@ -12,6 +12,7 @@ const createMiddleware = (adapterFactory) => {
 
   const middleware = ctx => {
     console.log('slack request')
+    console.log(ctx.req.body)
     requestListener(ctx.req, ctx.res)
   }
 
