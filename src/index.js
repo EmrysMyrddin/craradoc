@@ -12,7 +12,7 @@ const interrupt = async (signal) => {
   const results = await allSettled([
     browser.close(),
   ])
-  const errors = results.filter(({ status, reason }) => status === 'rejected')
+  const errors = results.filter(({ status }) => status === 'rejected')
   if (errors.length) {
     errors.forEach(({ reason }) => console.error('failed to clean up:', reason.stack))
     process.exit(1)

@@ -1,8 +1,10 @@
 const Koa = require('koa')
+const logger = require('koa-logger')
 const route = require('koa-route')
 const slack = require('./slack')
 
 const app = new Koa()
+app.use(logger())
 app.use(route.all('/slack/interactions', slack.interactionsMiddleware))
 app.use(route.all('/slack/events', slack.eventsMiddleware))
 

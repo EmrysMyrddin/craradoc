@@ -23,6 +23,7 @@
     "dotenv": "^8.1.0",
     "koa": "^2.8.1",
     "koa-body": "^4.1.1",
+    "koa-logger": "^3.2.1",
     "koa-respond": "^2.1.0",
     "koa-route": "^3.2.0",
     "puppeteer": "^1.20.0"
