@@ -1,10 +1,10 @@
 const Koa = require('koa')
-const KoaBody = require('koa-body')
-const koaRespond = require('koa-respond')
+const route = require('koa-route')
+const slack = require('./slack')
 
 const app = new Koa()
-app.use(koaRespond())
-app.use(new KoaBody())
+app.use(route.all('/slack/interactions', slack.interactionsMiddleware))
+app.use(route.all('/slack/events', slack.eventsMiddleware))
 
 const listen = () => {
   const port = process.env.PORT || 4000

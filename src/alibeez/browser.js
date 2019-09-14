@@ -16,7 +16,10 @@ const getBrowser = () => {
 }
 
 const close = async () => {
-  if (!browserPromise) return
+  if (!browserPromise) {
+    console.info('browser not started, nothing to close')
+    return
+  }
   console.info('closing browser')
   const browser = await browserPromise
   await browser.close()
