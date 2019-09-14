@@ -1,0 +1,32 @@
+{
+  "name": "craradoc",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "src/index.js",
+  "repository": "https://github.com/EmrysMyrddin/craradoc.git",
+  "author": "Valentin Cocaud <v.cocaud@gmail.com>",
+  "license": "GPL-3.0-or-later",
+  "private": false,
+  "engines": {
+    "node": "^12.10.0"
+  },
+  "scripts": {
+    "dev": "nodemon --harmony --inspect=9001",
+    "lint": "eslint src --fix",
+    "start": "node --harmony src/index.js"
+  },
+  "dependencies": {
+    "@slack/interactive-messages": "^1.3.0",
+    "dotenv": "^8.1.0",
+    "koa": "^2.8.1",
+    "koa-body": "^4.1.1",
+    "koa-respond": "^2.1.0",
+    "puppeteer": "^1.20.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.4.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "nodemon": "^1.19.2"
+  }
+}
