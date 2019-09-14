@@ -4,8 +4,10 @@ let browserPromise
 
 const getBrowser = () => {
   if (browserPromise) return browserPromise
+  const headless = process.env.CHROME_HEADLESS !== 'false'
+  console.info(`starting up browser ${headless ? 'in headless mode' : ''}`)
   return browserPromise = puppeteer.launch({
-    headless: false,
+    headless,
     devtools: true,
     args: [
       '--window-size=2000,1000',
