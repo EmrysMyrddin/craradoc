@@ -2,10 +2,14 @@ require('dotenv/config')
 const worker = require('./alibeez/worker.js')
 const app = require('./http/app')
 const browser = require('./alibeez/browser')
+const bot = require('./bot')
 const { allSettled } = require('./utils/promises')
 
-// worker().catch(err => console.error(err.stack))
-app.listen()
+const start = async () => {
+  // worker().catch(err => console.error(err.stack))
+  await app.listen()
+  await bot.listen()
+}
 
 const interrupt = async (signal) => {
   console.info(`caught ${signal} signal. Cleaning up...`)
@@ -21,3 +25,5 @@ const interrupt = async (signal) => {
 }
 
 ['SIGUSR1', 'SIGUSR2', 'SIGINT', 'SIGTERM'].forEach(signal => process.on(signal, interrupt))
+
+start()
